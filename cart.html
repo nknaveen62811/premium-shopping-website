@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUXORA | Premium Shopping</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+ --dark:#171717;
+ --gold:#b18b55;
+ --light:#f8f7f4;
+ --gray:#888;
+}
+
+body{
+ font-family:'DM Sans',sans-serif;
+ background:var(--light);
+ color:var(--dark);
+}
+
+header{
+ height:82px;
+ padding:0 8%;
+ background:rgba(255,255,255,.94);
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ border-bottom:1px solid #eee;
+ position:sticky;
+ top:0;
+ z-index:100;
+ animation:slideDown .7s ease;
+}
+
+.logo{
+ font-family:'Playfair Display',serif;
+ font-size:30px;
+ letter-spacing:4px;
+ font-weight:700;
+}
+
+.logo span{color:var(--gold)}
+
+nav{display:flex;gap:30px}
+
+nav a{
+ text-decoration:none;
+ color:#555;
+ font-size:11px;
+ font-weight:700;
+ letter-spacing:1px;
+ transition:.3s;
+}
+
+nav a:hover{color:var(--gold)}
+
+.cart-icon{
+ border:1px solid #ddd;
+ padding:12px 18px;
+ border-radius:30px;
+ font-size:12px;
+ font-weight:700;
+}
+
+.container{
+ max-width:1300px;
+ margin:55px auto;
+ padding:0 25px;
+}
+
+.heading{
+ display:flex;
+ justify-content:space-between;
+ align-items:end;
+ margin-bottom:35px;
+ animation:fadeUp .8s ease;
+}
+
+.heading h1{
+ font-family:'Playfair Display',serif;
+ font-size:43px;
+ font-weight:500;
+}
+
+.heading p{
+ color:#888;
+ font-size:13px;
+ margin-top:10px;
+}
+
+.continue-link{
+ text-decoration:none;
+ color:var(--gold);
+ font-size:12px;
+ font-weight:700;
+}
+
+.cart-layout{
+ display:grid;
+ grid-template-columns:1.8fr 1fr;
+ gap:30px;
+ align-items:start;
+}
+
+.cart-box,.summary{
+ background:white;
+ border:1px solid #eee;
+ border-radius:15px;
+ padding:28px;
+ box-shadow:0 12px 35px rgba(0,0,0,.035);
+ animation:fadeUp .8s ease;
+}
+
+.section-title{
+ font-size:15px;
+ font-weight:800;
+ margin-bottom:20px;
+}
+
+.product{
+ display:grid;
+ grid-template-columns:120px 1fr auto;
+ gap:20px;
+ padding:23px 0;
+ border-bottom:1px solid #eee;
+ animation:productEnter .6s ease both;
+ transition:.3s;
+}
+
+.product:hover{
+ background:#fdfcf9;
+ padding-left:8px;
+ padding-right:8px;
+}
+
+.product img{
+ width:120px;
+ height:135px;
+ object-fit:cover;
+ border-radius:10px;
+ background:#f3f3f3;
+ transition:transform .4s;
+}
+
+.product img:hover{transform:scale(1.06)}
+
+.category{
+ font-size:10px;
+ color:var(--gold);
+ letter-spacing:2px;
+ font-weight:800;
+}
+
+.product h3{
+ font-size:14px;
+ margin:9px 0;
+}
+
+.description{
+ font-size:11px;
+ color:#888;
+ margin-bottom:12px;
+}
+
+.price{font-size:15px;font-weight:800}
+
+.old-price{
+ color:#aaa;
+ text-decoration:line-through;
+ font-size:11px;
+ margin-left:6px;
+}
+
+.actions{
+ display:flex;
+ align-items:center;
+ gap:15px;
+ margin-top:14px;
+ flex-wrap:wrap;
+}
+
+.qty{
+ display:flex;
+ align-items:center;
+ border:1px solid #ddd;
+ border-radius:6px;
+ overflow:hidden;
+}
+
+.qty button{
+ width:31px;
+ height:32px;
+ background:white;
+ border:0;
+ cursor:pointer;
+ font-size:17px;
+ transition:.2s;
+}
+
+.qty button:hover{
+ background:#222;
+ color:white;
+}
+
+.qty span{
+ width:27px;
+ text-align:center;
+ font-size:12px;
+ font-weight:700;
+}
+
+.remove{
+ border:0;
+ background:none;
+ color:#999;
+ font-size:11px;
+ cursor:pointer;
+ transition:.2s;
+}
+
+.remove:hover{color:#c33}
+
+.item-total{
+ font-size:13px;
+ font-weight:800;
+ white-space:nowrap;
+}
+
+.summary{
+ position:sticky;
+ top:105px;
+}
+
+.summary h2{
+ font-family:'Playfair Display',serif;
+ font-size:26px;
+ font-weight:500;
+ margin-bottom:25px;
+}
+
+.row{
+ display:flex;
+ justify-content:space-between;
+ margin:19px 0;
+ font-size:13px;
+ color:#777;
+}
+
+.row strong{color:#222}
+
+.discount{color:#29976d!important}
+
+.promo{
+ display:flex;
+ gap:8px;
+ margin:25px 0;
+}
+
+.promo input{
+ flex:1;
+ min-width:0;
+ padding:13px;
+ border:1px solid #ddd;
+ border-radius:6px;
+ outline:none;
+}
+
+.promo input:focus{border-color:var(--gold)}
+
+.promo button{
+ padding:0 17px;
+ background:#222;
+ color:white;
+ border:0;
+ border-radius:6px;
+ cursor:pointer;
+ transition:.3s;
+}
+
+.promo button:hover{background:var(--gold)}
+
+.total{
+ border-top:1px solid #eee;
+ padding-top:20px;
+ margin-top:22px;
+}
+
+.total span{color:#222;font-weight:700}
+
+.total strong{
+ font-size:22px;
+ color:var(--gold);
+}
+
+.checkout{
+ width:100%;
+ padding:17px;
+ margin-top:10px;
+ border:0;
+ border-radius:7px;
+ background:linear-gradient(110deg,#171717,#514431,#171717);
+ background-size:200% 100%;
+ color:white;
+ font-weight:800;
+ font-size:12px;
+ letter-spacing:1.5px;
+ cursor:pointer;
+ transition:.4s;
+}
+
+.checkout:hover{
+ background-position:100% 0;
+ transform:translateY(-3px);
+ box-shadow:0 10px 25px #b18b5544;
+}
+
+.checkout:disabled{
+ opacity:.5;
+ cursor:not-allowed;
+ transform:none;
+}
+
+.secure{
+ text-align:center;
+ font-size:11px;
+ color:#999;
+ margin-top:17px;
+}
+
+.delivery{
+ margin-top:23px;
+ padding:17px;
+ background:#f8f6f1;
+ border-radius:8px;
+ font-size:12px;
+ line-height:2.3;
+ color:#666;
+}
+
+.delivery span{color:#26976b;margin-right:7px}
+
+.empty{
+ display:none;
+ text-align:center;
+ padding:70px 10px;
+}
+
+.empty h2{
+ font-family:'Playfair Display',serif;
+ font-size:29px;
+ margin-bottom:12px;
+}
+
+.empty p{
+ color:#888;
+ font-size:13px;
+ margin-bottom:25px;
+}
+
+.continue{
+ display:inline-block;
+ padding:14px 25px;
+ background:#222;
+ color:white;
+ text-decoration:none;
+ border-radius:5px;
+ font-size:11px;
+}
+
+.toast{
+ position:fixed;
+ bottom:25px;
+ right:25px;
+ background:#222;
+ color:white;
+ padding:16px 25px;
+ border-radius:8px;
+ font-size:13px;
+ opacity:0;
+ transform:translateY(20px);
+ transition:.4s;
+ pointer-events:none;
+ z-index:200;
+}
+
+.toast.show{
+ opacity:1;
+ transform:translateY(0);
+}
+
+footer{
+ text-align:center;
+ padding:35px;
+ font-size:11px;
+ color:#999;
+ letter-spacing:2px;
+}
+
+@keyframes fadeUp{
+ from{opacity:0;transform:translateY(25px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes slideDown{
+ from{opacity:0;transform:translateY(-25px)}
+ to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes productEnter{
+ from{opacity:0;transform:translateX(-20px)}
+ to{opacity:1;transform:translateX(0)}
+}
+
+@media(max-width:850px){
+ .cart-layout{grid-template-columns:1fr}
+ .summary{position:static}
+ nav{gap:12px}
+}
+
+@media(max-width:600px){
+ header{padding:0 5%;height:70px}
+ .logo{font-size:23px}
+ nav{display:none}
+ .container{padding:0 13px;margin:30px auto}
+ .heading{align-items:start;gap:12px;flex-direction:column}
+ .heading h1{font-size:34px}
+ .cart-box,.summary{padding:17px}
+ .product{
+  grid-template-columns:90px 1fr;
+  gap:12px;
+ }
+ .product img{width:90px;height:110px}
+ .product h3{font-size:13px}
+ .item-total{grid-column:2}
+ .toast{left:15px;right:15px;text-align:center}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">LUXORA<span>.</span></div>
+
+ <nav>
+  <a href="#">NEW ARRIVALS</a>
+  <a href="#">COLLECTIONS</a>
+  <a href="#">ABOUT US</a>
+ </nav>
+
+ <div class="cart-icon">
+  BAG (<span id="cartCount">8</span>)
+ </div>
+</header>
+
+<main class="container">
+
+ <div class="heading">
+  <div>
+   <h1>Your Shopping Bag</h1>
+   <p>Thoughtfully selected. Almost yours.</p>
+  </div>
+  <a href="#" class="continue-link">← CONTINUE SHOPPING</a>
+ </div>
+
+ <div class="cart-layout">
+
+ <section class="cart-box">
+
+  <div class="section-title">
+   Shopping Bag <span id="itemCount">(8 items)</span>
+  </div>
+
+  <div id="products">
+
+   <!-- PRODUCT 1 -->
+   <div class="product" data-price="12999">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Sneakers">
+    <div>
+     <span class="category">FOOTWEAR</span>
+     <h3>Urban Premium Sneakers</h3>
+     <p class="description">Classic Red · Size UK 9</p>
+     <span class="price">₹12,999</span>
+     <span class="old-price">₹15,999</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button Pt="NK">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹12,999</div>
+   </div>
+
+   <!-- PRODUCT 2 -->
+   <div class="product" data-price="4999">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Watch">
+    <div>
+     <span class="category">ACCESSORIES</span>
+     <h3>Minimalist Classic Watch</h3>
+     <p class="description">Silver · One Size</p>
+     <span class="price">₹4,999</span>
+     <span class="old-price">₹6,499</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹4,999</div>
+   </div>
+
+   <!-- PRODUCT 3 -->
+   <div class="product" data-price="7999">
+    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="Headphones">
+    <div>
+     <span class="category">ELECTRONICS</span>
+     <h3>Studio Wireless Headphones</h3>
+     <p class="description">Matte Black · Bluetooth</p>
+     <span class="price">₹7,999</span>
+     <span class="old-price">₹9,499</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹7,999</div>
+   </div>
+
+   <!-- PRODUCT 4 -->
+   <div class="product" data-price="3499">
+    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500" alt="Backpack">
+    <div>
+     <span class="category">BAGS</span>
+     <h3>Executive Travel Backpack</h3>
+     <p class="description">Charcoal Grey · 25L</p>
+     <span class="price">₹3,499</span>
+     <span class="old-price">₹4,499</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹3,499</div>
+   </div>
+
+   <!-- PRODUCT 5 -->
+   <div class="product" data-price="2499">
+    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500" alt="Sunglasses">
+    <div>
+     <span class="category">FASHION</span>
+     <h3>Premium Designer Sunglasses</h3>
+     <p class="description">Black Frame · UV Protection</p>
+     <span class="price">₹2,499</span>
+     <span class="old-price">₹3,499</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹2,499</div>
+   </div>
+
+   <!-- PRODUCT 6 -->
+   <div class="product" data-price="5999">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="Smart watch">
+    <div>
+     <span class="category">TECHNOLOGY</span>
+     <h3>Pro Series Smart Watch</h3>
+     <p class="description">Black Edition · AMOLED</p>
+     <span class="price">₹5,999</span>
+     <span class="old-price">₹7,499</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹5,999</div>
+   </div>
+
+   <!-- PRODUCT 7 -->
+   <div class="product" data-price="1999">
+    <img src="https://images.unsplash.com/photo-1627123424574-724758594e93?w=500" alt="Wallet">
+    <div>
+     <span class="category">LIFESTYLE</span>
+     <h3>Genuine Leather Wallet</h3>
+     <p class="description">Brown · Premium Leather</p>
+     <span class="price">₹1,999</span>
+     <span class="old-price">₹2,799</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹1,999</div>
+   </div>
+
+   <!-- PRODUCT 8 -->
+   <div class="product" data-price="2999">
+    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500" alt="Hoodie">
+    <div>
+     <span class="category">CLOTHING</span>
+     <h3>Premium Casual Hoodie</h3>
+     <p class="description">Beige · Size L</p>
+     <span class="price">₹2,999</span>
+     <span class="old-price">₹3,999</span>
+     <div class="actions">
+      <div class="qty">
+       <button onclick="changeQty(this,-1)">−</button>
+       <span>1</span>
+       <button onclick="changeQty(this,1)">+</button>
+      </div>
+      <button class="remove" onclick="removeItem(this)">✕ Remove</button>
+     </div>
+    </div>
+    <div class="item-total">₹2,999</div>
+   </div>
+
+  </div>
+
+  <div class="empty" id="empty">
+   <h2>Your bag is waiting.</h2>
+   <p>Looks like you haven't added anything yet.</p>
+   <a href="#" class="continue">EXPLORE COLLECTION</a>
+  </div>
+
+ </section>
+
+ <aside class="summary">
+
+  <h2>Order Summary</h2>
+
+  <div class="row">
+   <span>Subtotal</span>
+   <strong id="subtotal">₹42,992</strong>
+  </div>
+
+  <div class="row">
+   <span>Discount</span>
+   <strong class="discount" id="discount">−₹1,500</strong>
+  </div>
+
+  <div class="row">
+   <span>Delivery</span>
+   <strong class="discount">FREE</strong>
+  </div>
+
+  <div class="promo">
+   <input id="coupon" placeholder="Enter promo code">
+   <button onclick="applyCoupon()">APPLY</button>
+  </div>
+
+  <div class="row total">
+   <span>Total Amount</span>
+   <strong id="total">₹41,492</strong>
+  </div>
+
+  <button class="checkout" id="checkout" onclick="checkout()">
+   PROCEED TO CHECKOUT →
+  </button>
+
+  <div class="secure">
+   🔒︎ Secure checkout · Safe payments
+  </div>
+
+  <div class="delivery">
+   <span>✓ Free delivery on this order</span><br>
+   <span>✓ Easy returns within 7 days</span><br>
+   <span>✓ Premium quality guaranteed</span> 
+  </div>
+
+ </aside>
+
+ </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+ LUXORA © 2026 · CRAFTED FOR THE EXTRAORDINARY
+</footer>
+
+<script>
+
+let couponApplied=false;
+let toastTimer;
+
+function format(n){
+ return '₹'+n.toLocaleString('en-IN');
+}
+
+function showToast(message){
+ const toast=document.getElementById('toast');
+ toast.textContent=message;
+ toast.classList.add('show');
+
+ clearTimeout(toastTimer);
+
+ toastTimer=setTimeout(()=>{
+  toast.classList.remove('show');
+ },2500);
+}
+
+function updateCart(){
+
+ const products=[...document.querySelectorAll('.product')];
+
+ let subtotal=0;
+ let count=0;
+
+ products.forEach(product=>{
+
+  const price=Number(product.dataset.price);
+  const qty=Number(product.querySelector('.qty span').textContent);
+
+  const amount=price*qty;
+
+  subtotal+=amount;
+  count+=qty;
+
+  product.querySelector('.item-total').textContent=format(amount);
+
+ });
+
+ let discount=products.length?1500:0;
+
+ if(couponApplied && subtotal>0){
+  discount+=Math.round(subtotal*.05);
+ }
+
+ discount=Math.min(discount,subtotal);
+
+ document.getElementById('subtotal').textContent=format(subtotal);
+ document.getElementById('discount').textContent='−'+format(discount);
+ document.getElementById('total').textContent=format(subtotal-discount);
+
+ document.getElementById('cartCount').textContent=count;
+ document.getElementById('itemCount').textContent='('+count+' items)';
+
+ const isEmpty=count===0;
+
+ document.getElementById('empty').style.display=isEmpty?'block':'none';
+ document.getElementById('products').style.display=isEmpty?'none':'block';
+
+ document.getElementById('checkout').disabled=isEmpty;
+
+}
+
+function changeQty(button,change){
+
+ const span=button.parentElement.querySelector('span');
+
+ let qty=Number(span.textContent)+change;
+
+ if(qty<1){
+  showToast('Minimum quantity is 1. Remove the product instead.');
+  return;
+ }
+
+ span.textContent=qty;
+
+ span.style.animation='none';
+ void span.offsetWidth;
+ span.style.animation='pop .3s ease';
+
+ updateCart();
+}
+
+function removeItem(button){
+
+ const product=button.closest('.product');
+
+ product.style.transition='.3s';
+ product.style.opacity='0';
+ product.style.transform='translateX(40px)';
+
+ setTimeout(()=>{
+  product.remove();
+  updateCart();
+  showToast('Product removed successfully.');
+ },300);
+
+}
+
+function applyCoupon(){
+
+ const code=document.getElementById('coupon').value.trim().toUpperCase();
+
+ if(code==='LUXORA5'){
+
+  if(couponApplied){
+   showToast('Coupon already applied.');
+   return;
+  }
+
+  couponApplied=true;
+  showToast('Extra 5% discount applied!');
+
+ }else{
+
+  showToast('Invalid coupon. Try LUXORA5.');
+
+ }
+
+ updateCart();
+}
+
+function checkout(){
+
+ if(document.querySelectorAll('.product').length===0){
+  showToast('Your shopping bag is empty.');
+  return;
+ }
+
+ showToast('Checkout integration is required to place your order.');
+
+}
+
+updateCart();
+
+</script>
+
+</body>
+</html>
