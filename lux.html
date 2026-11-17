@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUXORA | Luxury Shopping</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --black:#151515;--gold:#b18b55;--gold2:#d9bd8c;
+ --cream:#f7f5f0;--white:#fff;--gray:#888;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--black)}
+button,input,select{font-family:inherit}
+button{cursor:pointer}
+
+/* LOGIN AND REGISTER */
+
+#authPage{min-height:100vh}
+.auth-header{
+ height:80px;background:white;display:flex;align-items:center;
+ justify-content:space-between;padding:0 7%;border-bottom:1px solid #eee;
+}
+.logo{font:700 30px 'Playfair Display',serif;letter-spacing:4px}
+.logo span{color:var(--gold)}
+.header-link{font-size:11px;color:#555;text-decoration:none;letter-spacing:1px;font-weight:700}
+.header-link:hover{color:var(--gold)}
+.auth-main{
+ min-height:calc(100vh - 130px);display:flex;align-items:center;
+ justify-content:center;padding:45px 20px;
+ background:radial-gradient(circle at 10% 20%,#e8dfd0 0,transparent 30%),
+ radial-gradient(circle at 90% 90%,#e8dfd0 0,transparent 30%),var(--cream);
+}
+.login-wrapper{
+ width:100%;max-width:1050px;min-height:600px;display:grid;
+ grid-template-columns:1fr 1fr;background:white;
+ box-shadow:0 25px 80px #00000013;animation:appear .8s ease;
+}
+.left-panel{
+ position:relative;overflow:hidden;
+ background:linear-gradient(0deg,#100f0ed9,#100f0e4d),
+ url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000') center/cover;
+ display:flex;flex-direction:column;justify-content:space-between;
+ padding:55px 45px;color:white;
+}
+.left-panel:before{
+ content:"";position:absolute;width:350px;height:350px;
+ border:1px solid #ffffff35;border-radius:50%;right:-160px;top:100px;
+ animation:float 8s ease-in-out infinite;
+}
+.left-panel:after{
+ content:"";position:absolute;width:250px;height:250px;
+ border:1px solid #ffffff35;border-radius:50%;right:-110px;top:150px;
+}
+.left-content,.left-bottom{position:relative;z-index:2}
+.small-heading{color:var(--gold2);font-size:10px;letter-spacing:5px;font-weight:800}
+.left-content h1{font:500 48px/1.2 'Playfair Display',serif;margin:25px 0}
+.left-content h1 span{color:var(--gold2);font-style:italic}
+.left-content p{color:#dedbd5;font-size:12px;line-height:2.1;max-width:330px}
+.left-bottom .line{width:50px;height:2px;background:var(--gold2);margin-bottom:15px}
+.left-bottom p{color:#ddd;font:italic 16px 'Playfair Display',serif}
+.right-panel{
+ padding:55px;display:flex;flex-direction:column;justify-content:center;
+}
+.form-top{margin-bottom:30px}
+.form-top .eyebrow{font-size:9px;letter-spacing:3px;color:var(--gold);font-weight:800}
+.form-top h2{font:500 38px 'Playfair Display',serif;margin:13px 0 8px}
+.form-top p{color:#999;font-size:12px}
+.form-group{margin-bottom:19px}
+.form-group label{display:block;font-size:11px;font-weight:800;margin-bottom:10px;letter-spacing:.5px}
+.input-wrap{position:relative}
+.input-wrap input{
+ width:100%;height:49px;padding:0 45px 0 15px;
+ border:1px solid #e5e1da;outline:none;background:#faf9f6;
+ font-size:12px;color:#222;transition:.3s;
+}
+.input-wrap input:focus{border-color:var(--gold);background:white;box-shadow:0 0 0 3px #b18b5515}
+.input-wrap input::placeholder{color:#aaa}
+.field-icon{position:absolute;right:15px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:16px;cursor:pointer}
+.options{display:flex;justify-content:space-between;align-items:center;margin:5px 0 25px}
+.remember{display:flex;align-items:center;gap:8px;color:#777;font-size:11px;cursor:pointer}
+.remember input{accent-color:var(--gold)}
+.forgot{font-size:11px;color:var(--gold);text-decoration:none;font-weight:700}
+.login-btn{
+ width:100%;height:51px;background:var(--black);border:1px solid var(--black);
+ color:white;font-size:10px;font-weight:800;letter-spacing:2px;transition:.35s;
+}
+.login-btn:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 25px #b18b5540}
+.divider{display:flex;align-items:center;gap:15px;margin:25px 0;color:#aaa;font-size:9px;letter-spacing:2px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:#eee}
+.google-btn{
+ height:48px;background:white;border:1px solid #e5e1da;
+ display:flex;align-items:center;justify-content:center;gap:12px;
+ font-size:11px;font-weight:700;color:#444;transition:.3s;width:100%;
+}
+.google-btn:hover{border-color:var(--gold);background:#faf8f4}
+.google-icon{font-size:17px;font-weight:800;color:#4285f4}
+.signup{text-align:center;margin-top:25px;font-size:11px;color:#999}
+.signup a{color:var(--gold);text-decoration:none;font-weight:800;margin-left:4px}
+.signup a:hover{color:var(--black)}
+.message{text-align:center;font-size:11px;margin-top:13px;min-height:15px;color:#a16c30}
+.auth-footer{background:#151515;color:#999;padding:22px;text-align:center;font-size:9px;letter-spacing:2px}
+.auth-footer span{color:var(--gold)}
+#registerForm{display:none}
+
+/* SHOPPING HOMEPAGE */
+
+#shopPage{display:none}
+.shop-header{
+ height:82px;background:#fff;display:flex;align-items:center;
+ justify-content:space-between;padding:0 6%;position:sticky;
+ top:0;z-index:100;border-bottom:1px solid #eee;
+}
+nav{display:flex;gap:25px}
+nav a{text-decoration:none;color:#555;font-size:10px;font-weight:800;letter-spacing:1.4px;transition:.3s}
+nav a:hover{color:var(--gold)}
+.header-actions{display:flex;align-items:center;gap:10px}
+.header-btn{border:1px solid #e7e3dc;background:white;padding:11px 15px;border-radius:30px;font-size:12px;font-weight:700}
+.header-btn:hover{border-color:var(--gold);color:var(--gold)}
+.cart-count{background:var(--black);color:white}
+.cart-count span{color:var(--gold2)}
+.hero{
+ min-height:390px;display:flex;align-items:center;padding:60px 9%;
+ background:linear-gradient(90deg,#111c 0%,#1118 48%,#1112 100%),
+ url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1800') center/cover;
+ color:white;position:relative;overflow:hidden;
+}
+.hero-content{max-width:650px;animation:rise .8s ease}
+.eyebrow{font-size:10px;letter-spacing:5px;color:var(--gold2);font-weight:800}
+.hero h1{font:500 clamp(38px,5vw,65px)/1.12 'Playfair Display',serif;margin:20px 0}
+.hero h1 span{color:var(--gold2);font-style:italic}
+.hero p{font-size:13px;color:#ddd;line-height:2;max-width:480px}
+.hero-btn{margin-top:25px;padding:15px 27px;background:var(--gold);color:white;border:0;font-size:10px;font-weight:800;letter-spacing:2px;transition:.3s}
+.hero-btn:hover{background:white;color:#222;transform:translateY(-3px)}
+.hero-note{position:absolute;right:8%;bottom:35px;font:italic 19px 'Playfair Display',serif;color:#e6d3b4}
+.shop-main{max-width:1500px;margin:auto;padding:35px 4% 70px}
+.trust-strip{display:grid;grid-template-columns:repeat(4,1fr);background:white;border:1px solid #eee;margin-bottom:35px}
+.trust-item{padding:19px 10px;text-align:center;border-right:1px solid #eee}
+.trust-item:last-child{border:0}
+.trust-item strong{font-size:11px;display:block;letter-spacing:.5px}
+.trust-item span{font-size:10px;color:#999;display:block;margin-top:5px}
+.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}
+.section-heading h2{font:500 29px 'Playfair Display',serif}
+.section-heading p{font-size:11px;color:#999;margin-top:6px}
+.category-strip{display:flex;gap:11px;overflow-x:auto;padding:4px 0 18px}
+.cat{flex:0 0 auto;border:1px solid #e5e1da;background:white;padding:13px 19px;font-size:10px;font-weight:800;letter-spacing:.6px;transition:.25s}
+.cat:hover,.cat.active{background:var(--black);color:white;border-color:var(--black)}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin:24px 0;padding:18px 0;border-top:1px solid #e8e4dc;border-bottom:1px solid #e8e4dc;gap:15px}
+.toolbar h2{font:500 26px 'Playfair Display',serif}
+.toolbar p{font-size:10px;color:#999;margin-top:5px}
+.toolbar-controls{display:flex;gap:9px;align-items:center}
+.toolbar select,.filter-select{padding:12px 13px;background:white;border:1px solid #ddd;font-size:10px;outline:none;max-width:190px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:25px}
+.sidebar{background:white;border:1px solid #eae7e1;padding:22px;height:max-content;position:sticky;top:105px}
+.filter-heading{font:500 20px 'Playfair Display',serif;margin-bottom:22px}
+.filter-group{padding:18px 0;border-top:1px solid #eee}
+.filter-group h3{font-size:10px;letter-spacing:1.2px;margin-bottom:14px}
+.filter-option{display:flex;align-items:center;justify-content:space-between;margin:12px 0;font-size:11px;color:#666}
+.filter-option label{display:flex;align-items:center;gap:9px;cursor:pointer}
+.filter-option input{accent-color:var(--gold)}
+.filter-option small{color:#aaa}
+.price-range{width:100%;accent-color:var(--gold)}
+.price-value{font-size:11px;color:var(--gold);font-weight:800;margin-top:9px}
+.clear-btn{width:100%;background:#171717;color:white;padding:12px;border:0;font-size:10px;font-weight:800;letter-spacing:1px;margin-top:15px}
+.clear-btn:hover{background:var(--gold)}
+.products-area{min-width:0}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.product-card{background:white;border:1px solid #eee;min-width:0;transition:.3s;position:relative;animation:rise .5s ease both}
+.product-card:hover{transform:translateY(-7px);box-shadow:0 16px 35px #00000012}
+.product-image{height:235px;background:#eee;position:relative;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.product-card:hover .product-image img{transform:scale(1.08)}
+.product-tag{position:absolute;left:10px;top:11px;background:#171717;color:white;padding:7px 9px;font-size:8px;letter-spacing:1px;font-weight:800}
+.product-tag.sale{background:#a64c40}
+.heart{position:absolute;right:10px;top:10px;width:33px;height:33px;background:white;border:0;border-radius:50%;font-size:18px;box-shadow:0 3px 10px #0001;transition:.2s}
+.heart.liked{color:#d43c53}
+.product-info{padding:15px 13px}
+.product-brand{font-size:8px;letter-spacing:2px;color:var(--gold);font-weight:800}
+.product-name{font-size:12px;font-weight:700;margin:8px 0;min-height:31px;line-height:1.5}
+.rating{font-size:10px;color:#c28d35}
+.rating span{color:#999;margin-left:4px}
+.price-line{display:flex;align-items:center;gap:7px;margin-top:11px;flex-wrap:wrap}
+.price{font-size:15px;font-weight:800}
+.old-price{font-size:10px;color:#aaa;text-decoration:line-through}
+.discount{font-size:9px;color:#27946b;font-weight:800}
+.card-actions{display:flex;gap:7px;margin-top:14px}
+.add-btn{flex:1;background:#171717;color:white;border:0;padding:11px 5px;font-size:9px;font-weight:800;letter-spacing:.7px;transition:.3s}
+.add-btn:hover{background:var(--gold)}
+.view-btn{background:#f3f0e9;border:0;padding:0 12px;font-size:14px}
+.no-results{display:none;background:white;text-align:center;padding:75px 15px}
+.no-results h2{font:500 29px 'Playfair Display',serif;margin-bottom:10px}
+.no-results p{color:#999;font-size:12px}
+.load-wrap{text-align:center;padding:35px 0}
+.load-btn{background:transparent;border:1px solid #171717;padding:15px 36px;font-size:10px;font-weight:800;letter-spacing:1.5px;transition:.3s}
+.load-btn:hover{background:#171717;color:white}
+.newsletter{background:#171717;color:white;padding:55px 20px;text-align:center;margin-top:45px}
+.newsletter h2{font:500 32px 'Playfair Display',serif}
+.newsletter p{color:#bbb;font-size:11px;margin:12px 0 22px}
+.newsletter input{padding:14px;width:min(300px,65%);border:0;outline:none;font-size:11px}
+.newsletter button{padding:14px 20px;background:var(--gold);border:0;color:white;font-size:10px;font-weight:800}
+.shop-footer{background:#101010;color:#999;text-align:center;padding:27px;font-size:9px;letter-spacing:2px}
+.shop-footer span{color:var(--gold)}
+.toast{position:fixed;bottom:25px;right:25px;background:#171717;color:white;padding:16px 23px;font-size:12px;z-index:500;opacity:0;transform:translateY(20px);transition:.3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateY(0)}
+.modal{display:none;position:fixed;inset:0;background:#000a;z-index:400;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modal-box{position:relative;background:white;max-width:750px;width:100%;display:grid;grid-template-columns:1fr 1fr;animation:rise .3s ease}
+.modal-box img{width:100%;height:390px;object-fit:cover}
+.modal-details{padding:35px;align-self:center}
+.modal-details h2{font:500 29px 'Playfair Display',serif;margin:12px 0}
+.modal-details p{font-size:12px;line-height:1.9;color:#888;margin:15px 0}
+.close{position:absolute;right:12px;top:12px;background:white;border:0;border-radius:50%;width:33px;height:33px;font-size:21px;z-index:2}
+.mobile-filter{display:none}
+.account-btn{border:1px solid #e7e3dc;background:white;padding:10px 13px;border-radius:30px;font-size:11px;font-weight:700}
+.account-btn:hover{color:var(--gold);border-color:var(--gold)}
+
+@keyframes appear{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1150px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:850px){
+ .login-wrapper{grid-template-columns:1fr;max-width:480px}
+ .left-panel{min-height:270px;padding:30px}
+ .left-content h1{font-size:34px;margin:15px 0}
+ .left-content p{font-size:11px}
+ .left-bottom{display:none}
+ .right-panel{padding:40px 30px}
+ nav{display:none}
+ .layout{grid-template-columns:1fr}
+ .sidebar{position:static;display:none}
+ .sidebar.open{display:block}
+ .mobile-filter{display:block;padding:11px 15px;background:#171717;color:white;border:0;font-size:10px;font-weight:800}
+ .product-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+ .auth-header{height:68px;padding:0 5%}
+ .logo{font-size:23px}
+ .right-panel{padding:35px 22px}
+ .form-top h2{font-size:32px}
+ .shop-header{height:68px;padding:0 4%}
+ .header-btn{padding:9px 10px;font-size:10px}
+ .account-btn{padding:9px}
+ .hero{min-height:320px;padding:40px 7%}
+ .hero-note{display:none}
+ .shop-main{padding:25px 13px 50px}
+ .trust-strip{grid-template-columns:repeat(2,1fr)}
+ .trust-item:nth-child(2){border-right:0}
+ .trust-item:nth-child(-n+2){border-bottom:1px solid #eee}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .product-image{height:175px}
+ .product-info{padding:11px 9px}
+ .product-name{font-size:11px}
+ .price{font-size:13px}
+ .toolbar{align-items:flex-start;flex-direction:column}
+ .toolbar-controls{width:100%;flex-wrap:wrap}
+ .toolbar select{flex:1;min-width:0}
+ .modal-box{grid-template-columns:1fr;max-width:400px;max-height:90vh;overflow:auto}
+ .modal-box img{height:220px}
+ .modal-details{padding:20px}
+ .section-heading h2{font-size:24px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= LOGIN / REGISTER PAGE ================= -->
+
+<div id="authPage">
+
+<header class="auth-header">
+ <div class="logo">LUXORA<span>.</span></div>
+ <a href="#" class="header-link" onclick="return false">PREMIUM SHOPPING EXPERIENCE</a>
+</header>
+
+<main class="auth-main">
+<div class="login-wrapper">
+
+<section class="left-panel">
+ <div class="logo">LUXORA<span>.</span></div>
+ <div class="left-content">
+  <div class="small-heading">THE LUXORA PRIVILEGE</div>
+  <h1>Discover<br>Your World of<br><span>Elegance.</span></h1>
+  <p>Step into a world of extraordinary collections, timeless sophistication and exclusive privileges. Your luxury shopping journey begins here.</p>
+ </div>
+ <div class="left-bottom">
+  <div class="line"></div>
+  <p>Curated. Crafted. Extraordinary.</p>
+ </div>
+</section>
+
+<section class="right-panel">
+
+<!-- SIGN IN FORM -->
+
+<div id="loginSection">
+ <div class="form-top">
+  <div class="eyebrow">WELCOME BACK TO LUXORA</div>
+  <h2>Sign In</h2>
+  <p>Enter your details to access your account.</p>
+ </div>
+
+ <form id="loginForm">
+  <div class="form-group">
+   <label>EMAIL ADDRESS</label>
+   <div class="input-wrap">
+    <input type="email" id="loginEmail" placeholder="Enter your email address" required>
+    <span class="field-icon">✉</span>
+   </div>
+  </div>
+
+  <div class="form-group">
+   <label>PASSWORD</label>
+   <div class="input-wrap">
+    <input type="password" id="loginPassword" placeholder="Enter your password" minlength="6" required>
+    <span class="field-icon" onclick="togglePassword('loginPassword',this)">◉</span>
+   </div>
+  </div>
+
+  <div class="options">
+   <label class="remember"><input type="checkbox" id="remember"> Remember me</label>
+   <a href="#" class="forgot" onclick="forgotPassword(event)">Forgot Password?</a>
+  </div>
+
+  <button type="submit" class="login-btn">SIGN IN TO YOUR ACCOUNT →</button>
+  <div class="message" id="loginMessage"></div>
+ </form>
+
+ <div class="divider">OR CONTINUE WITH</div>
+ <button class="google-btn" onclick="googleLogin()"><span class="google-icon">G</span> CONTINUE WITH GOOGLE</button>
+
+ <div class="signup">
+  New to LUXORA?
+  <a href="#" onclick="showRegister(event)">CREATE AN ACCOUNT</a>
+ </div>
+</div>
+
+<!-- CREATE ACCOUNT FORM -->
+
+<div id="registerForm">
+ <div class="form-top">
+  <div class="eyebrow">JOIN THE LUXORA PRIVILEGE</div>
+  <h2>Create Account</h2>
+  <p>Create your account and discover extraordinary collections.</p>
+ </div>
+
+ <form id="createForm">
+  <div class="form-group">
+   <label>FULL NAME</label>
+   <div class="input-wrap">
+    <input type="text" id="fullName" placeholder="Enter your full name" required>
+   </div>
+  </div>
+
+  <div class="form-group">
+   <label>EMAIL ADDRESS</label>
+   <div class="input-wrap">
+    <input type="email" id="registerEmail" placeholder="Enter your email address" required>
+   </div>
+  </div>
+
+  <div class="form-group">
+   <label>CREATE PASSWORD</label>
+   <div class="input-wrap">
+    <input type="password" id="registerPassword" placeholder="Create a password (minimum 6 characters)" minlength="6" required>
+    <span class="field-icon" onclick="togglePassword('registerPassword',this)">◉</span>
+   </div>
+  </div>
+
+  <div class="form-group">
+   <label>CONFIRM PASSWORD</label>
+   <div class="input-wrap">
+    <input type="password" id="confirmPassword" placeholder="Confirm your password" minlength="6" required>
+   </div>
+  </div>
+
+  <button type="submit" class="login-btn">CREATE MY LUXORA ACCOUNT →</button>
+  <div class="message" id="registerMessage"></div>
+ </form>
+
+ <div class="signup">
+  Already have an account?
+  <a href="#" onclick="showLogin(event)">SIGN IN</a>
+ </div>
+</div>
+
+</section>
+</div>
+</main>
+
+<footer class="auth-footer">LUXORA <span>©</span> 2026 · CRAFTED FOR THE EXTRAORDINARY</footer>
+</div>
+
+<!-- ================= SHOPPING HOMEPAGE ================= -->
+
+<div id="shopPage">
+
+<header class="shop-header">
+ <div class="logo">LUXORA<span>.</span></div>
+
+ <nav>
+  <a href="#">HOME</a>
+  <a href="#collections">COLLECTIONS</a>
+  <a href="#shop">SHOP</a>
+  <a href="#newsletter">EXCLUSIVE OFFERS</a>
+ </nav>
+
+ <div class="header-actions">
+  <button class="header-btn" onclick="showWishlist()">♡ <span id="wishCount">0</span></button>
+  <button class="header-btn cart-count" onclick="showCart()">BAG (<span id="cartCount">0</span>)</button>
+  <button class="account-btn" onclick="logout()">LOG OUT ↗</button>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="hero-content">
+  <div class="eyebrow">THE ART OF LUXURY LIVING</div>
+  <h1>Elegance is an <span>Attitude.</span></h1>
+  <p>Discover an extraordinary collection of fashion, technology, accessories and lifestyle essentials. Curated for those who appreciate the finer things.</p>
+  <button class="hero-btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">EXPLORE COLLECTION →</button>
+ </div>
+ <div class="hero-note">Curated. Crafted. Extraordinary.</div>
+</section>
+
+<main class="shop-main">
+
+<section class="trust-strip">
+ <div class="trust-item"><strong>✦ PREMIUM COLLECTION</strong><span>Carefully curated products</span></div>
+ <div class="trust-item"><strong>◇ SECURE SHOPPING</strong><span>Safe shopping experience</span></div>
+ <div class="trust-item"><strong>↗ EASY RETURNS</strong><span>Hassle-free shopping</span></div>
+ <div class="trust-item"><strong>✧ EXCLUSIVE OFFERS</strong><span>Special member privileges</span></div>
+</section>
+
+<section id="collections">
+ <div class="section-heading">
+  <div><h2>Explore Collections</h2><p>Find your signature style</p></div>
+ </div>
+
+ <div class="category-strip" id="categories">
+  <button class="cat active" data-cat="All">ALL COLLECTIONS</button>
+  <button class="cat" data-cat="Fashion">FASHION</button>
+  <button class="cat" data-cat="Electronics">ELECTRONICS</button>
+  <button class="cat" data-cat="Footwear">FOOTWEAR</button>
+  <button class="cat" data-cat="Watches">WATCHES</button>
+  <button class="cat" data-cat="Jewellery">JEWELLERY</button>
+  <button class="cat" data-cat="Beauty">BEAUTY</button>
+  <button class="cat" data-cat="Bags">BAGS</button>
+  <button class="cat" data-cat="Home">HOME & DECOR</button>
+  <button class="cat" data-cat="Sports">SPORTS</button>
+  <button class="cat" data-cat="Accessories">ACCESSORIES</button>
+ </div>
+</section>
+
+<section id="shop">
+ <div class="toolbar">
+  <div>
+   <h2>Our Premium Selection</h2>
+   <p id="resultCount">Discover our complete collection</p>
+  </div>
+
+  <div class="toolbar-controls">
+   <input id="search" class="filter-select" placeholder="Search products..." oninput="applyFilters()">
+   <select id="sort" onchange="applyFilters()">
+    <option value="featured">Featured</option>
+    <option value="low">Price: Low to High</option>
+    <option value="high">Price: High to Low</option>
+    <option value="rating">Top Rated</option>
+    <option value="name">Name A-Z</option>
+    <option value="discount">Biggest Discount</option>
+   </select>
+   <button class="mobile-filter" onclick="document.getElementById('sidebar').classList.toggle('open')">FILTERS ⚙</button>
+  </div>
+ </div>
+
+ <div class="layout">
+  <aside class="sidebar" id="sidebar">
+   <div class="filter-heading">Refine Selection</div>
+
+   <div class="filter-group">
+    <h3>CATEGORIES</h3>
+    <div id="sideCategories"></div>
+   </div>
+
+   <div class="filter-group">
+    <h3>PRICE RANGE</h3>
+    <input type="range" class="price-range" id="priceRange" min="500" max="100000" step="500" value="100000" oninput="updatePrice()">
+    <div class="price-value" id="priceValue">Up to ₹1,00,000</div>
+   </div>
+
+   <div class="filter-group">
+    <h3>CUSTOMER RATING</h3>
+    <div class="filter-option"><label><input type="radio" name="rating" value="0" checked onchange="applyFilters()"> All ratings</label></div>
+    <div class="filter-option"><label><input type="radio" name="rating" value="4" onchange="applyFilters()"> ★★★★ & above</label></div>
+    <div class="filter-option"><label><input type="radio" name="rating" value="4.5" onchange="applyFilters()"> ★★★★★ 4.5+</label></div>
+   </div>
+
+   <div class="filter-group">
+    <h3>AVAILABILITY</h3>
+    <div class="filter-option"><label><input type="checkbox" id="stockOnly" onchange="applyFilters()"> In stock only</label></div>
+   </div>
+
+   <button class="clear-btn" onclick="clearFilters()">CLEAR ALL FILTERS</button>
+  </aside>
+
+  <div class="products-area">
+   <div class="product-grid" id="productGrid"></div>
+
+   <div class="no-results" id="noResults">
+    <h2>No matching products</h2>
+    <p>Try another search or clear your filters.</p>
+   </div>
+
+   <div class="load-wrap">
+    <button class="load-btn" id="loadMore" onclick="loadMore()">LOAD MORE PRODUCTS +</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="newsletter" id="newsletter">
+ <div class="eyebrow">THE LUXORA PRIVILEGE</div>
+ <h2>Something Special Awaits.</h2>
+ <p>Be the first to discover new arrivals and exclusive collections.</p>
+ <form onsubmit="subscribe(event)">
+  <input type="email" required placeholder="Enter your email address">
+  <button type="submit">SUBSCRIBE →</button>
+ </form>
+</section>
+
+</main>
+
+<footer class="shop-footer">LUXORA <span>©</span> 2026 · CRAFTED FOR THE EXTRAORDINARY</footer>
+</div>
+
+<!-- PRODUCT TOAST -->
+
+<div class="toast" id="toast"></div>
+
+<!-- QUICK VIEW MODAL -->
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+ <div class="modal-box">
+  <button class="close" onclick="closeModal()">×</button>
+  <img id="modalImage" src="" alt="Product">
+  <div class="modal-details">
+   <div class="product-brand" id="modalBrand"></div>
+   <h2 id="modalName"></h2>
+   <div class="rating" id="modalRating"></div>
+   <h2 id="modalPrice"></h2>
+   <p id="modalDescription"></p>
+   <button class="add-btn" id="modalAdd">ADD TO BAG +</button>
+  </div>
+ </div>
+</div>
+
+<script>
+
+/* ================= AUTHENTICATION PAGE ================= */
+
+function showRegister(e){
+ if(e)e.preventDefault();
+ document.getElementById("loginSection").style.display="none";
+ document.getElementById("registerForm").style.display="block";
+}
+
+function showLogin(e){
+ if(e)e.preventDefault();
+ document.getElementById("registerForm").style.display="none";
+ document.getElementById("loginSection").style.display="block";
+}
+
+function togglePassword(id,icon){
+ const field=document.getElementById(id);
+ if(field.type==="password"){
+  field.type="text";
+  icon.textContent="◎";
+ }else{
+  field.type="password";
+  icon.textContent="◉";
+ }
+}
+
+function openShop(){
+ document.getElementById("authPage").style.display="none";
+ document.getElementById("shopPage").style.display="block";
+ window.scrollTo(0,0);
+}
+
+function logout(){
+ document.getElementById("shopPage").style.display="none";
+ document.getElementById("authPage").style.display="block";
+ document.getElementById("loginForm").reset();
+ document.getElementById("loginMessage").textContent="";
+ window.scrollTo(0,0);
+}
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ const email=document.getElementById("loginEmail").value.trim();
+ const password=document.getElementById("loginPassword").value;
+ const message=document.getElementById("loginMessage");
+
+ if(!email||!password){
+  message.textContent="Please enter all required details.";
+  return;
+ }
+
+ if(password.length<6){
+  message.textContent="Password must contain at least 6 characters.";
+  return;
+ }
+
+ message.textContent="Login successful! Welcome to LUXORA.";
+ setTimeout(openShop,600);
+});
+
+document.getElementById("createForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ const name=document.getElementById("fullName").value.trim();
+ const email=document.getElementById("registerEmail").value.trim();
+ const password=document.getElementById("registerPassword").value;
+ const confirm=document.getElementById("confirmPassword").value;
+ const message=document.getElementById("registerMessage");
+
+ if(!name||!email||!password||!confirm){
+  message.textContent="Please complete all fields.";
+  return;
+ }
+
+ if(password.length<6){
+  message.textContent="Password must contain at least 6 characters.";
+  return;
+ }
+
+ if(password!==confirm){
+  message.textContent="Passwords do not match.";
+  return;
+ }
+
+ message.textContent="Account form validated! Welcome to LUXORA.";
+ setTimeout(openShop,700);
+});
+
+function forgotPassword(e){
+ e.preventDefault();
+ const email=document.getElementById("loginEmail").value.trim();
+
+ if(!email){
+  alert("Please enter your email address first.");
+  return;
+ }
+
+ alert("Password recovery will be connected for: "+email);
+}
+
+function googleLogin(){
+ alert("Google authentication integration is required.");
+}
+
+/* ================= PRODUCT CATALOG ================= */
+
+const catalog=[
+["Fashion","Italian Tailored Blazer","Velvet Evening Dress","Classic Linen Shirt","Premium Silk Saree","Designer Denim Jacket","Cashmere Sweater","Luxury Polo T-Shirt","Formal Business Suit","Summer Floral Dress","Premium Leather Jacket"],
+["Electronics","Pro Wireless Headphones","Ultra HD Smart Television","Professional DSLR Camera","Premium Tablet Pro","Gaming Laptop Elite","Wireless Mechanical Keyboard","Bluetooth Sound System","Portable Mini Projector","Smart Home Speaker","Studio Monitor Display"],
+["Footwear","Classic White Sneakers","Italian Leather Loafers","Premium Running Shoes","Luxury Chelsea Boots","Designer High Heels","Urban Street Sneakers","Suede Formal Shoes","Classic Ballet Flats","Performance Training Shoes","Premium Leather Sandals"],
+["Watches","Royal Automatic Watch","Minimalist Silver Watch","Classic Chronograph","Heritage Gold Watch","Executive Dress Watch","Sport Digital Watch","Luxury Skeleton Watch","Rose Gold Timepiece","Ocean Diver Watch","Signature Black Watch"],
+["Jewellery","Diamond Pendant Necklace","Gold Statement Earrings","Pearl Bracelet","Luxury Tennis Bracelet","Rose Gold Ring","Emerald Drop Earrings","Classic Diamond Studs","Gold Chain Necklace","Sapphire Cocktail Ring","Silver Charm Bracelet"],
+["Beauty","Luxury Eau De Parfum","Premium Skincare Kit","Vitamin C Face Serum","Hydrating Face Cream","Designer Makeup Palette","Luxury Body Lotion","Silk Hair Care Set","Premium Lipstick Collection","Gentle Face Cleanser","Signature Fragrance Set"],
+["Bags","Italian Leather Handbag","Executive Laptop Bag","Luxury Travel Suitcase","Designer Crossbody Bag","Premium Tote Bag","Classic Leather Backpack","Evening Clutch Bag","Luxury Weekender Bag","Mini Shoulder Bag","Business Briefcase"],
+["Home","Designer Table Lamp","Luxury Lounge Chair","Marble Coffee Table","Premium Bedding Set","Ceramic Decor Vase","Modern Wall Clock","Designer Floor Lamp","Luxury Dining Chair","Minimalist Bookshelf","Elegant Tableware Set"],
+["Sports","Professional Yoga Mat","Premium Gym Duffel","Running Performance Jacket","Fitness Smart Tracker","Professional Tennis Racket","Training Resistance Kit","Cycling Helmet Pro","Sports Water Bottle","Premium Yoga Blocks","Outdoor Hiking Backpack"],
+["Accessories","Designer Sunglasses","Genuine Leather Wallet","Premium Silk Scarf","Luxury Belt Collection","Classic Card Holder","Gold Cufflinks","Cashmere Winter Gloves","Designer Hair Accessories","Premium Travel Organizer","Signature Keychain"]
+];
+
+const categories=["Fashion","Electronics","Footwear","Watches","Jewellery","Beauty","Bags","Home","Sports","Accessories"];
+
+const brands=["LUXORA SIGNATURE","ATELIER NOIR","MAISON ELITE","VELVET & CO.","AURELIA","MONARCH LUXE","NOBLE HOUSE","ÉCLAT STUDIO"];
+
+const imagePool=[
+"photo-1542291026-7eec264c27ff","photo-1523275335684-37898b6baf30",
+"photo-1505740420928-5e560c06d30e","photo-1553062407-98eeb64c6a62",
+"photo-1511499767150-a48a237f0083","photo-1551028719-00167b16eac5",
+"photo-1549298916-b41d501d3772","photo-1516035069371-29a1b244cc32",
+"photo-1507473885765-e6ed057f782c","photo-1608248543803-ba4f8c70ae0b",
+"photo-1584917865442-de89df76afd3","photo-1543163521-1bf539c55dd2",
+"photo-1608043152269-423dbba4e7e1","photo-1541643600914-78b084683601",
+"photo-1514228742587-6b1558fcca3d","photo-1527814050087-3793815479db",
+"photo-1496181133206-80ce9b88a853","photo-1591047139829-d91aecb6caea",
+"photo-1627123424574-724758594e93","photo-1556821840-3a63f95609a7",
+"photo-1529139574466-a303027c1d8b","photo-1483985988355-763728e1935b",
+"photo-1490481651871-ab68de25d43d","photo-1521572163474-6864f9cf17ab",
+"photo-1539109136881-3be0616acf4b","photo-1525507119028-ed4c629a60a3",
+"photo-1535632066927-ab7c9ab60908","photo-1611652022419-a9419f74343d",
+"photo-1611930022073-b7a4ba5fcccd","photo-1596462502278-27bfdc403348",
+"photo-1565026057447-bc90a3dceb87","photo-1503602642458-232111445657",
+"photo-1601925260368-ae2f83cf8b7f","photo-1460353581641-37baddab0fa2",
+"photo-1543076447-215ad9ba6923","photo-1598033129183-c4f50c736f10",
+"photo-1547887538-e3a2f32cb1cc","photo-1515886657613-9f3515b0c78f",
+"photo-1550745165-9bc0b252726f"
+];
+
+const products=[];
+let index=0;
+
+catalog.forEach((items,group)=>{
+ items.slice(1).forEach((name,j)=>{
+  let price=599+((index*1783+group*941)%65000);
+  if(group===1)price+=10000;
+  if(group===3||group===4)price+=3000;
+
+  const old=Math.round(price*(1.18+(j%4)*.09));
+
+  products.push({
+   id:index+1,
+   name,
+   category:categories[group],
+   brand:brands[(index+group)%brands.length],
+   price,
+   old,
+   rating:4.1+((index*7)%9)/10,
+   stock:index%13!==0,
+   image:"https://images.unsplash.com/"+imagePool[index%imagePool.length]+"?auto=format&fit=crop&w=650&q=85",
+   description:name+" from our curated "+categories[group].toLowerCase()+" collection. Crafted with attention to detail, quality materials and a refined contemporary aesthetic."
+  });
+
+  index++;
+ });
+});
+
+let selectedCategory="All";
+let filtered=[];
+let visible=20;
+let cart=[];
+let wishlist=new Set();
+let toastTimer;
+
+const money=n=>"₹"+n.toLocaleString("en-IN");
+
+/* SIDEBAR CATEGORIES */
+
+function buildSidebar(){
+ const el=document.getElementById("sideCategories");
+
+ categories.forEach(c=>{
+  const count=products.filter(p=>p.category===c).length;
+
+  el.innerHTML+=`
+   <div class="filter-option">
+    <label><input type="checkbox" value="${c}" class="sideCat" onchange="applyFilters()"> ${c}</label>
+    <small>${count}</small>
+   </div>`;
+ });
+}
+
+/* PRODUCT CARDS */
+
+function productCard(p,i){
+ const discount=Math.round((1-p.price/p.old)*100);
+
+ return `
+ <article class="product-card" style="animation-delay:${(i%12)*.035}s">
+  <div class="product-image">
+   <img src="${p.image}" alt="${p.name}" loading="lazy">
+   <span class="product-tag ${discount>25?'sale':''}">${discount}% OFF</span>
+   <button class="heart ${wishlist.has(p.id)?'liked':''}" onclick="toggleWish(${p.id})">${wishlist.has(p.id)?"♥":"♡"}</button>
+  </div>
+
+  <div class="product-info">
+   <div class="product-brand">${p.brand}</div>
+   <div class="product-name">${p.name}</div>
+   <div class="rating">★★★★★ <span>${p.rating.toFixed(1)} · Customer rated</span></div>
+
+   <div class="price-line">
+    <span class="price">${money(p.price)}</span>
+    <span class="old-price">${money(p.old)}</span>
+    <span class="discount">${discount}% off</span>
+   </div>
+
+   <div class="card-actions">
+    <button class="add-btn" onclick="addCart(${p.id})">ADD TO BAG +</button>
+    <button class="view-btn" onclick="quickView(${p.id})" title="Quick view">⌕</button>
+   </div>
+  </div>
+ </article>`;
+}
+
+/* DISPLAY PRODUCTS */
+
+function render(){
+ const grid=document.getElementById("productGrid");
+ const shown=filtered.slice(0,visible);
+
+ grid.innerHTML=shown.map(productCard).join("");
+
+ document.getElementById("resultCount").textContent=
+ `${filtered.length} products found · Showing ${shown.length}`;
+
+ document.getElementById("noResults").style.display=filtered.length?"none":"block";
+ grid.style.display=filtered.length?"grid":"none";
+
+ document.getElementById("loadMore").style.display=
+ shown.length<filtered.length?"inline-block":"none";
+}
+
+/* SEARCH AND FILTER */
+
+function applyFilters(){
+ const query=document.getElementById("search").value.toLowerCase().trim();
+ const max=Number(document.getElementById("priceRange").value);
+ const minRating=Number(document.querySelector('input[name="rating"]:checked').value);
+ const stock=document.getElementById("stockOnly").checked;
+
+ const sideCats=[...document.querySelectorAll(".sideCat:checked")].map(x=>x.value);
+ const cats=sideCats.length?sideCats:(selectedCategory==="All"?[]:[selectedCategory]);
+
+ filtered=products.filter(p=>{
+  const text=(p.name+" "+p.category+" "+p.brand+" "+p.description).toLowerCase();
+
+  return text.includes(query)
+   &&(!cats.length||cats.includes(p.category))
+   &&p.price<=max
+   &&p.rating>=minRating
+   &&(!stock||p.stock);
+ });
+
+ const sort=document.getElementById("sort").value;
+
+ if(sort==="low")filtered.sort((a,b)=>a.price-b.price);
+ if(sort==="high")filtered.sort((a,b)=>b.price-a.price);
+ if(sort==="rating")filtered.sort((a,b)=>b.rating-a.rating);
+ if(sort==="name")filtered.sort((a,b)=>a.name.localeCompare(b.name));
+ if(sort==="discount")filtered.sort((a,b)=>(b.old-b.price)/b.old-(a.old-a.price)/a.old);
+
+ visible=20;
+ render();
+}
+
+/* CATEGORY BUTTONS */
+
+document.querySelectorAll(".cat").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  document.querySelectorAll(".cat").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  selectedCategory=btn.dataset.cat;
+
+  document.querySelectorAll(".sideCat").forEach(c=>c.checked=false);
+
+  applyFilters();
+ });
+});
+
+/* PRICE FILTER */
+
+function updatePrice(){
+ const value=Number(document.getElementById("priceRange").value);
+ document.getElementById("priceValue").textContent="Up to "+money(value);
+ applyFilters();
+}
+
+/* LOAD MORE */
+
+function loadMore(){
+ visible+=20;
+ render();
+}
+
+/* CART */
+
+function addCart(id){
+ const p=products.find(x=>x.id===id);
+ const existing=cart.find(x=>x.id===id);
+
+ if(existing)existing.qty++;
+ else cart.push({...p,qty:1});
+
+ updateCart();
+ showToast(p.name+" added to your bag");
+}
+
+function updateCart(){
+ const count=cart.reduce((sum,p)=>sum+p.qty,0);
+ document.getElementById("cartCount").textContent=count;
+}
+
+function showCart(){
+ if(!cart.length){
+  showToast("Your shopping bag is empty");
+  return;
+ }
+
+ const total=cart.reduce((sum,p)=>sum+p.price*p.qty,0);
+ const details=cart.map(p=>`${p.name} × ${p.qty}`).join("\n");
+
+ alert("YOUR LUXORA BAG\n\n"+details+"\n\nTotal: "+money(total));
+}
+
+/* WISHLIST */
+
+function toggleWish(id){
+ if(wishlist.has(id)){
+  wishlist.delete(id);
+  showToast("Removed from wishlist");
+ }else{
+  wishlist.add(id);
+  showToast("Added to your wishlist ♥");
+ }
+
+ document.getElementById("wishCount").textContent=wishlist.size;
+ render();
+}
+
+function showWishlist(){
+ if(!wishlist.size){
+  showToast("Your wishlist is empty");
+  return;
+ }
+
+ selectedCategory="All";
+
+ document.querySelectorAll(".cat").forEach(b=>{
+  b.classList.toggle("active",b.dataset.cat==="All");
+ });
+
+ filtered=products.filter(p=>wishlist.has(p.id));
+ visible=filtered.length;
+
+ render();
+
+ document.getElementById("shop").scrollIntoView({behavior:"smooth"});
+ showToast("Showing your wishlist");
+}
+
+/* QUICK VIEW */
+
+function quickView(id){
+ const p=products.find(x=>x.id===id);
+
+ document.getElementById("modalImage").src=p.image;
+ document.getElementById("modalBrand").textContent=p.brand;
+ document.getElementById("modalName").textContent=p.name;
+ document.getElementById("modalRating").textContent="★★★★★  "+p.rating.toFixed(1)+" / 5";
+ document.getElementById("modalPrice").textContent=money(p.price);
+ document.getElementById("modalDescription").textContent=p.description;
+
+ document.getElementById("modalAdd").onclick=()=>{
+  addCart(id);
+  closeModal();
+ };
+
+ document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
+
+/* CLEAR FILTERS */
+
+function clearFilters(){
+ document.getElementById("search").value="";
+ document.getElementById("sort").value="featured";
+ document.getElementById("priceRange").value=100000;
+ document.getElementById("priceValue").textContent="Up to ₹1,00,000";
+ document.getElementById("stockOnly").checked=false;
+
+ document.querySelector('input[name="rating"][value="0"]').checked=true;
+ document.querySelectorAll(".sideCat").forEach(x=>x.checked=false);
+
+ selectedCategory="All";
+
+ document.querySelectorAll(".cat").forEach(b=>{
+  b.classList.toggle("active",b.dataset.cat==="All");
+ });
+
+ applyFilters();
+}
+
+/* TOAST MESSAGE */
+
+function showToast(message){
+ const toast=document.getElementById("toast");
+
+ toast.textContent=message;
+ toast.classList.add("show");
+
+ clearTimeout(toastTimer);
+
+ toastTimer=setTimeout(()=>{
+  toast.classList.remove("show");
+ },2500);
+}
+
+/* NEWSLETTER */
+
+function subscribe(e){
+ e.preventDefault();
+ showToast("Thank you for joining LUXORA!");
+ e.target.reset();
+}
+
+/* INITIALIZE SHOP DATA */
+
+buildSidebar();
+applyFilters();
+
+</script>
+
+</body>
+</html>
