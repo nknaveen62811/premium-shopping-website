@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUXORA | Sign In</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --black:#151515;
+    --gold:#b18b55;
+    --gold2:#d9bd8c;
+    --cream:#f7f5f0;
+    --white:#fff;
+    --gray:#888;
+}
+
+body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--cream);
+    color:var(--black);
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    height:80px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    font:700 30px 'Playfair Display',serif;
+    letter-spacing:4px;
+}
+
+.logo span{
+    color:var(--gold);
+}
+
+.header-link{
+    font-size:11px;
+    color:#555;
+    text-decoration:none;
+    letter-spacing:1px;
+    font-weight:700;
+}
+
+.header-link:hover{
+    color:var(--gold);
+}
+
+/* MAIN */
+
+main{
+    min-height:calc(100vh - 80px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:45px 20px;
+    background:
+        radial-gradient(circle at 10% 20%,#e8dfd0 0,transparent 30%),
+        radial-gradient(circle at 90% 90%,#e8dfd0 0,transparent 30%),
+        var(--cream);
+}
+
+.login-wrapper{
+    width:100%;
+    max-width:1050px;
+    min-height:600px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:white;
+    box-shadow:0 25px 80px #00000013;
+    animation:appear .8s ease;
+}
+
+/* LEFT DESIGN */
+
+.left-panel{
+    position:relative;
+    overflow:hidden;
+    background:
+      linear-gradient(0deg,#100f0ed9,#100f0e4d),
+      url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1000')
+      center/cover;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:55px 45px;
+    color:white;
+}
+
+.left-panel::before{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    border:1px solid #ffffff35;
+    border-radius:50%;
+    right:-160px;
+    top:100px;
+    animation:float 8s ease-in-out infinite;
+}
+
+.left-panel::after{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border:1px solid #ffffff35;
+    border-radius:50%;
+    right:-110px;
+    top:150px;
+}
+
+.left-content{
+    position:relative;
+    z-index:2;
+}
+
+.small-heading{
+    color:var(--gold2);
+    font-size:10px;
+    letter-spacing:5px;
+    font-weight:800;
+}
+
+.left-content h1{
+    font:500 48px/1.2 'Playfair Display',serif;
+    margin:25px 0;
+}
+
+.left-content h1 span{
+    color:var(--gold2);
+    font-style:italic;
+}
+
+.left-content p{
+    color:#dedbd5;
+    font-size:12px;
+    line-height:2.1;
+    max-width:330px;
+}
+
+.left-bottom{
+    position:relative;
+    z-index:2;
+}
+
+.left-bottom .line{
+    width:50px;
+    height:2px;
+    background:var(--gold2);
+    margin-bottom:15px;
+}
+
+.left-bottom p{
+    color:#ddd;
+    font:italic 16px 'Playfair Display',serif;
+}
+
+/* RIGHT PANEL */
+
+.right-panel{
+    padding:55px 55px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.form-top{
+    margin-bottom:35px;
+}
+
+.form-top .eyebrow{
+    font-size:9px;
+    letter-spacing:3px;
+    color:var(--gold);
+    font-weight:800;
+}
+
+.form-top h2{
+    font:500 38px 'Playfair Display',serif;
+    margin:13px 0 8px;
+}
+
+.form-top p{
+    color:#999;
+    font-size:12px;
+}
+
+/* INPUTS */
+
+.form-group{
+    margin-bottom:21px;
+}
+
+.form-group label{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-bottom:10px;
+    letter-spacing:.5px;
+}
+
+.input-wrap{
+    position:relative;
+}
+
+.input-wrap input{
+    width:100%;
+    height:49px;
+    padding:0 45px 0 15px;
+    border:1px solid #e5e1da;
+    outline:none;
+    background:#faf9f6;
+    font-size:12px;
+    color:#222;
+    transition:.3s;
+}
+
+.input-wrap input:focus{
+    border-color:var(--gold);
+    background:white;
+    box-shadow:0 0 0 3px #b18b5515;
+}
+
+.input-wrap input::placeholder{
+    color:#aaa;
+}
+
+.field-icon{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--gold);
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* OPTIONS */
+
+.options{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:5px 0 25px;
+}
+
+.remember{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#777;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.remember input{
+    accent-color:var(--gold);
+}
+
+.forgot{
+    font-size:11px;
+    color:var(--gold);
+    text-decoration:none;
+    font-weight:700;
+}
+
+.forgot:hover{
+    color:#151515;
+}
+
+/* BUTTONS */
+
+.login-btn{
+    width:100%;
+    height:51px;
+    background:var(--black);
+    border:1px solid var(--black);
+    color:white;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+    transition:.35s;
+}
+
+.login-btn:hover{
+    background:var(--gold);
+    border-color:var(--gold);
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px #b18b5540;
+}
+
+.divider{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin:26px 0;
+    color:#aaa;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+.divider::before,
+.divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:#eee;
+}
+
+.google-btn{
+    height:48px;
+    background:white;
+    border:1px solid #e5e1da;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    font-size:11px;
+    font-weight:700;
+    color:#444;
+    transition:.3s;
+}
+
+.google-btn:hover{
+    border-color:var(--gold);
+    background:#faf8f4;
+}
+
+.google-icon{
+    font-size:17px;
+    font-weight:800;
+    color:#4285f4;
+}
+
+.signup{
+    text-align:center;
+    margin-top:28px;
+    font-size:11px;
+    color:#999;
+}
+
+.signup a{
+    color:var(--gold);
+    text-decoration:none;
+    font-weight:800;
+    margin-left:4px;
+}
+
+.signup a:hover{
+    color:var(--black);
+}
+
+.message{
+    text-align:center;
+    font-size:11px;
+    margin-top:14px;
+    min-height:15px;
+    color:#a16c30;
+}
+
+/* FOOTER */
+
+footer{
+    background:#151515;
+    color:#999;
+    padding:22px;
+    text-align:center;
+    font-size:9px;
+    letter-spacing:2px;
+}
+
+footer span{
+    color:var(--gold);
+}
+
+/* ANIMATIONS */
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-20px)}
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+    .login-wrapper{
+        grid-template-columns:1fr;
+        max-width:480px;
+    }
+
+    .left-panel{
+        min-height:270px;
+        padding:30px;
+    }
+
+    .left-content h1{
+        font-size:34px;
+        margin:15px 0;
+    }
+
+    .left-content p{
+        font-size:11px;
+    }
+
+    .left-bottom{
+        display:none;
+    }
+
+    .right-panel{
+        padding:40px 30px;
+    }
+}
+
+@media(max-width:480px){
+    header{
+        height:68px;
+        padding:0 5%;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .right-panel{
+        padding:35px 22px;
+    }
+
+    .form-top h2{
+        font-size:32px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">LUXORA<span>.</span></div>
+    <a href="#" class="header-link">BACK TO SHOP ←</a>
+</header>
+
+<main>
+
+<div class="login-wrapper">
+
+    <!-- LEFT SIDE -->
+
+    <section class="left-panel">
+
+        <div class="logo">LUXORA<span>.</span></div>
+
+        <div class="left-content">
+
+            <div class="small-heading">
+                THE LUXORA PRIVILEGE
+            </div>
+
+            <h1>
+                Discover<br>
+                Your World of<br>
+                <span>Elegance.</span>
+            </h1>
+
+            <p>
+                Step into a world of extraordinary collections,
+                timeless sophistication and exclusive privileges.
+                Your luxury shopping journey begins here.
+            </p>
+
+        </div>
+
+        <div class="left-bottom">
+            <div class="line"></div>
+            <p>Curated. Crafted. Extraordinary.</p>
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+
+    <section class="right-panel">
+
+        <div class="form-top">
+
+            <div class="eyebrow">WELCOME BACK TO LUXORA</div>
+
+            <h2>Sign In</h2>
+
+            <p>Enter your details to access your account.</p>
+
+        </div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label>EMAIL ADDRESS</label>
+
+                <div class="input-wrap">
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email address"
+                        required>
+
+                    <span class="field-icon">✉</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>PASSWORD</label>
+
+                <div class="input-wrap">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        minlength="6"
+                        required>
+
+                    <span
+                        class="field-icon"
+                        id="eye"
+                        onclick="togglePassword()">◉</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="remember">
+                    <input type="checkbox" id="remember">
+                    Remember me
+                </label>
+
+                <a href="#" class="forgot"
+                   onclick="forgotPassword(event)">
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <button type="submit" class="login-btn">
+                SIGN IN TO YOUR ACCOUNT →
+            </button>
+
+            <div class="message" id="message"></div>
+
+        </form>
+
+
+        <div class="divider">OR CONTINUE WITH</div>
+
+
+        <button class="google-btn" onclick="googleLogin()">
+
+            <span class="google-icon">G</span>
+
+            CONTINUE WITH GOOGLE
+
+        </button>
+
+
+        <div class="signup">
+
+            New to LUXORA?
+
+            <a href="#" onclick="createAccount(event)">
+                CREATE AN ACCOUNT
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+</main>
+
+<footer>
+    LUXORA <span>©</span> 2026 · CRAFTED FOR THE EXTRAORDINARY
+</footer>
+
+
+<script>
+
+function togglePassword(){
+
+    const password=document.getElementById("password");
+    const eye=document.getElementById("eye");
+
+    if(password.type==="password"){
+        password.type="text";
+        eye.textContent="◎";
+    }
+    else{
+        password.type="password";
+        eye.textContent="◉";
+    }
+
+}
+
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const email=document.getElementById("email").value.trim();
+    const password=document.getElementById("password").value;
+    const message=document.getElementById("message");
+
+    if(!email || !password){
+        message.textContent="Please enter all required details.";
+        return;
+    }
+
+    message.textContent="Login form validated successfully!";
+
+});
+
+
+function forgotPassword(e){
+
+    e.preventDefault();
+
+    const email=document.getElementById("email").value.trim();
+
+    if(!email){
+        alert("Please enter your email address first.");
+        return;
+    }
+
+    alert("Password recovery will be connected for: "+email);
+
+}
+
+
+function createAccount(e){
+
+    e.preventDefault();
+
+    alert("LUXORA registration page will be connected here.");
+
+}
+
+
+function googleLogin(){
+
+    alert("Google authentication integration is required.");
+
+}
+
+</script>
+
+</body>
+</html>
